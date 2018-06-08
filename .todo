@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<todo version="0.1.20">
+    <note priority="medium" time="1526266663" done="1526740021">
+        colorcode weights
+    </note>
+    <note priority="high" time="1526740135">
+        clustering
+    </note>
+    <note priority="medium" time="1526266629">
+        Visualise number of publications published in a year over the time since first publication
+    </note>
+    <note priority="medium" time="1526740185">
+        dynamically add and delete edges
+    </note>
+    <note priority="medium" time="1526740233">
+        position nodes based on last positioning and current weights
+    </note>
+    <note priority="medium" time="1526740385">
+        gather info on Network Growth models
+    </note>
+    <note priority="low" time="1526740441">
+        parallelise computations with dask
+    </note>
+</todo>

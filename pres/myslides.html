@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Kelvin Davis">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'http://lab.hakim.se/reveal-js/css/print/pdf.css' : 'http://lab.hakim.se/reveal-js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="http://lab.hakim.se/reveal-js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Social Networks</h1>
+  <p class="author">Kelvin Davis</p>
+</section>
+
+<section id="welcome" class="slide level1">
+<h1>Welcome</h1>
+<p>Help pls</p>
+<h2 id="oh-dear-god">Oh Dear God</h2>
+<p>this is death</p>
+</section>
+<section id="edge-connectivity" class="slide level1">
+<h1>Edge Connectivity</h1>
+<p><br /><span class="math display">$$e_{t+1}(i, j) = e_t(i, j) + \dfrac
+{\sum_{k \ne j} e_t(i, k)( e_t(k, j) - e_t(i,j) )}
+{\sum_{k \ne j} e_t(i, k)}
+$$</span><br /></p>
+<ul>
+<li><span class="math inline"><em>e</em><sub><em>t</em></sub>(<em>i</em>, <em>j</em>)</span> what <span class="math inline"><em>i</em></span> thinks of <span class="math inline"><em>j</em></span>.</li>
+<li><span class="math inline"><em>e</em><sub><em>t</em></sub>(<em>k</em>, <em>j</em>)−<em>e</em><sub><em>t</em></sub>(<em>i</em>, <em>j</em>)</span> the difference in opinion</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+  <script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://lab.hakim.se/reveal-js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true },
+              { src: 'http://lab.hakim.se/reveal-js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
