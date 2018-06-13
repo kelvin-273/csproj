@@ -4,6 +4,8 @@ import networkx as nx
 import random
 import markov_clustering as mc
 
+from itertools import islice, starmap
+
 from graph_init import *
 from graph_iter import *
 from graph_clus import *
@@ -34,6 +36,9 @@ def edges_change(G):
                    f,
                    get_weights
                    )
+
+def diff(op, xs):
+    return list(starmap(op, zip(islice(xs, 1, None), xs)))
 # Analytics --------------------------------------------------------------------
 
 def get_average_weight_per_node(G):
@@ -50,7 +55,7 @@ def av_weight_of_node(node):
 def get_weights(WG):
     return [d["weight"] for (_, _, d) in WG.edges(data=True)]
 
-def plot(G, cluster_map=None):
+def plot(G, cluster_map=None, pos=None):
     """plots the graph w/ or w/out clustering"""
 
     # sets all nodes to one cluster if cluster_map not given
@@ -105,34 +110,47 @@ if __name__ == '__main__':
     G = init_random_weighted_geo(100,10)
     clusters = my_clusters(G)
     cluster_map = get_cluster_map(clusters)
-    # plot(G, cluster_map)
-    for time in range(2):
+    plot(G, cluster_map)
+    
+    time_steps = 1000
+    for time in range(time_steps):
+        clusters = my_clusters(G)
 
         lo_clusters.append(clusters)
         av_cluster_sizes.append(av_cluster_size(clusters))
         lo_edges.append(get_weights(G))
 
         update_weights(G)
+        print("tick:", time, "/", time_steps)
 
         # collect the clusters
         # collect the edge differences
 
     clusters = my_clusters(G)
     cluster_map = get_cluster_map(clusters)
-    # plot(G, cluster_map)
-    zero_cls = [my_get_cluster_map(i)[0] for i in lo_clusters]
-    size_0_cluster = [len(i) for i in zero_cls]
-    distances = [cluster_difference(x, y) for (x, y) in zip(zero_cls[:-1], zero_cls[1:])]
+    plot(G, cluster_map)
+    # distances = [cluster_difference(x, y) for (x, y) in zip(zero_cls[:-1], zero_cls[1:])]
+
+    def f(person, time):
+        return my_get_cluster_map(lo_clusters[time])[person]
+
+    def llmap(op, ll):
+        return [[op(j) for j in i] for i in ll]
+
+    cls_pt = [[f(p, t) for t in range(time_steps)] for p in G.nodes()]
+    size_pt = llmap(len, cls_pt)
     # size_0_cluster = [len(my_get_cluster_map(i)[0]) for i in lo_clusters]
 
-    # plt.plot(range(1000), size_0_cluster)
-    # plt.title("size of node 0s cluster over time")
-    # plt.xlabel("time")
-    # plt.ylabel("cluster size")
-    # plt.show()
-    #
-    # plt.plot(range(999), distances)
-    # plt.title("Number of people entering and leaving 0s cluster over time")
-    # plt.xlabel("time")
-    # plt.ylabel("Number of people")
-    # plt.show()
+    for i in size_pt:
+        plt.plot(range(time_steps), i)
+    plt.title("size of each cluster over time")
+    plt.xlabel("time")
+    plt.ylabel("cluster size")
+    plt.show()
+    
+    for i in cls_pt:
+        plt.plot(range(time_steps - 1), diff(cluster_difference, i))
+    plt.title("Number of people entering and leaving each cluster over time")
+    plt.xlabel("time")
+    plt.ylabel("Number of people")
+    plt.show()

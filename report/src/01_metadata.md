@@ -1,6 +1,5 @@
 ---
-title:
-  When good neighbours become good friends
+title: A peer-pressure driven model of evolving social networks 
 author:
   - Kelvin Davis
 institution:

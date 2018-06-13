@@ -10,8 +10,8 @@ def update_weights(G):
         for j in G[i]:
             # print(i, j, updates[i][j], sep=' <> ')
             G[i][j]["weight"] = updates[i][j]
-    print('blah')
-    print(updates)
+    # print('blah')
+    # print(updates)
 
 def update_weights2(G):
     E = nx.to_numpy_array(G)
@@ -31,17 +31,19 @@ def new_weights_i(G, i):
 def new_weight_ij(G, i, j):
     e = lambda a, b: G[a][b]["weight"]
     numerator = np.sum([e(i,k)*(e(k,j) - e(i,j)) for k in G[i] if k != j and G[k].get(j)])
+
     denominator = np.sum([e(k,j) for k in G[i] if k != j and G[k].get(j)])
+    denominator *= 1
     # catch divide by zero error
-    if denominator == 0:0, (1 - (e(i,j) - 0.5)**2) / 2)
+    if denominator == 0:
         out = e(i,j)
     else:
         out = e(i,j) + numerator / denominator
 
-    # add gaussian
-    perturb = np.random.normal(0, (1 - (e(i,j) - 0.5)**2) / 2)
-    # print("perturb:", perturb)
-    out += perturb
+    # # add gaussian
+    # perturb = np.random.normal(0, (1 - (e(i,j) - 0.5)**2) / 2)
+    # # print("perturb:", perturb)
+    # out += perturb
 
     # bound between 0 and 1
     if out < 0:
